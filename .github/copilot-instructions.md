@@ -96,6 +96,38 @@ Assets (TSV/JSON)
 - **Saved sets**: stored in `localStorage['mhwSets']` via `SetService`
 - Everything is reconstructed at load time by looking up IDs against the in-memory `AppDataModel`
 
+## Building & Running
+
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Development Server
+
+```bash
+npm start
+```
+
+Navigates to `http://localhost:4200/`. The app auto-reloads on file changes.
+
+### Production Build
+
+```bash
+npm run build
+```
+
+Output is written to `dist/`.
+
+### Deploy to GitHub Pages
+
+```bash
+npm run deploy
+```
+
+This builds with `--base-href /mhw-builder/` and deploys the `dist/` folder to the `gh-pages` branch using `angular-cli-ghpages`.
+
 ## Conventions
 
 - TSV column parsers are in `src/app/data/parsers/` and implement `DataParser<T>`
