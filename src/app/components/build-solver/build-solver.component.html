@@ -1,0 +1,131 @@
+<div class="solver-container">
+	<h3>Build Solver</h3>
+
+	<!-- Rarity Selection -->
+	<div class="section">
+		<label class="section-label">Rarity Filter</label>
+		<div class="rarity-checkboxes">
+			<label *ngFor="let r of rarities" class="rarity-checkbox" [class.checked]="r.checked"
+				(click)="toggleRarity(r)">
+				<span class="checkbox-icon">
+					<i class="fas" [class.fa-check-square]="r.checked" [class.fa-square]="!r.checked"></i>
+				</span>
+				R{{r.value}}
+			</label>
+		</div>
+	</div>
+
+	<!-- Skill Requirements -->
+	<div class="section">
+		<label class="section-label">Required Skills</label>
+		<div class="skill-search">
+			<input [value]="skillSearchText" (input)="onSkillSearch($event.target.value)"
+				placeholder="Search skills..." class="skill-search-input" />
+			<div class="skill-dropdown" *ngIf="filteredSkills.length > 0">
+				<div class="skill-option" *ngFor="let skill of filteredSkills" (click)="addSkill(skill)">
+					{{skill.name}}
+				</div>
+			</div>
+		</div>
+
+		<div class="required-skills-list">
+			<div class="required-skill-item" *ngFor="let entry of requiredSkills; let i = index">
+				<span class="skill-name">{{entry.skill.name}}</span>
+				<div class="level-controls">
+					<button type="button" (click)="decreaseLevel(i)" class="level-btn">
+						<i class="fas fa-minus"></i>
+					</button>
+					<span class="level-value">Lv {{entry.level}}</span>
+					<button type="button" (click)="increaseLevel(i)" class="level-btn">
+						<i class="fas fa-plus"></i>
+					</button>
+				</div>
+				<button type="button" (click)="removeSkill(i)" class="remove-btn">
+					<i class="fas fa-times"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Charm Selection (optional) -->
+	<div class="section">
+		<label class="section-label">Charm (optional)</label>
+		<select [(ngModel)]="selectedCharmId" class="charm-select">
+			<option [ngValue]="null">-- None --</option>
+			<option *ngFor="let charm of charms" [ngValue]="charm.id">{{charm.name}}</option>
+		</select>
+	</div>
+
+	<!-- Search Button -->
+	<div class="section">
+		<button type="button" class="search-button" (click)="runSearch()" [disabled]="isSearching">
+			<i class="fas fa-search"></i>
+			{{ isSearching ? 'Searching...' : 'Find Builds' }}
+		</button>
+	</div>
+
+	<!-- Error Message -->
+	<div class="error-message" *ngIf="errorMessage">
+		{{errorMessage}}
+	</div>
+
+	<!-- Results -->
+	<div class="results-container" *ngIf="searchDone">
+		<div class="results-header">
+			Found {{results.length}} build(s)
+		</div>
+
+		<div class="result-card" *ngFor="let result of results; let i = index" (click)="selectResult(result)">
+			<div class="result-number">#{{i + 1}}</div>
+
+			<div class="armor-pieces">
+				<div class="piece">
+					<span class="piece-type">Head:</span>
+					<span class="piece-name">{{result.head?.name}}</span>
+				</div>
+				<div class="piece">
+					<span class="piece-type">Chest:</span>
+					<span class="piece-name">{{result.chest?.name}}</span>
+				</div>
+				<div class="piece">
+					<span class="piece-type">Arms:</span>
+					<span class="piece-name">{{result.arms?.name}}</span>
+				</div>
+				<div class="piece">
+					<span class="piece-type">Waist:</span>
+					<span class="piece-name">{{result.waist?.name}}</span>
+				</div>
+				<div class="piece">
+					<span class="piece-type">Legs:</span>
+					<span class="piece-name">{{result.legs?.name}}</span>
+				</div>
+				<div class="piece" *ngIf="result.charm">
+					<span class="piece-type">Charm:</span>
+					<span class="piece-name">{{result.charm?.name}}</span>
+				</div>
+			</div>
+
+			<div class="decorations" *ngIf="result.decorations.length > 0">
+				<span class="deco-label">Decorations:</span>
+				<span class="deco-item" *ngFor="let da of result.decorations">
+					{{da.decoration.name}} [{{da.decoration.level}}]
+				</span>
+			</div>
+
+			<div class="result-stats">
+				<span class="stat">Def: {{result.totalDefense}}</span>
+				<span class="stat">Slots: {{result.slotsUsed}}/{{result.slotsTotal}}</span>
+			</div>
+
+			<div class="result-skills">
+				<span class="result-skill" *ngFor="let s of result.totalSkills">
+					{{getSkillName(s.id)}} Lv{{s.level}}
+				</span>
+			</div>
+		</div>
+
+		<div class="no-results" *ngIf="results.length === 0">
+			No builds found matching your criteria. Try relaxing the requirements.
+		</div>
+	</div>
+</div>

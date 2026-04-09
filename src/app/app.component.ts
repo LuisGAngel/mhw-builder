@@ -40,6 +40,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 	@ViewChild('itemListModal', { static: true }) itemListModal: ModalComponent;
 	@ViewChild('changeLogModal', { static: true }) changeLogModal: ModalComponent;
 	@ViewChild('setListModal', { static: true }) setListModal: ModalComponent;
+	@ViewChild('solverModal', { static: true }) solverModal: ModalComponent;
 	@ViewChild('contributorsModal', { static: true }) contributorsModal: ModalComponent;
 
 	equipmentVisible = true;
@@ -233,5 +234,9 @@ export class AppComponent implements OnInit, AfterViewInit {
 
 	openContributors() {
 		this.contributorsModal.open();
+	}
+
+	openSolverModal() {
+		this.solverModal.open();
 	}
 }

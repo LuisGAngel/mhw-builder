@@ -115,6 +115,10 @@ export class DataService {
 		return _.find(this.appDataProvider.appData.skills, skill => skill.id === id);
 	}
 
+	getAllSkills(): SkillModel[] {
+		return this.appDataProvider.appData.skills;
+	}
+
 	getSkills(itemSkills: SkillReferenceModel[]): SkillModel[] {
 		return _.filter(this.appDataProvider.appData.skills, skill => {
 			return _.some(itemSkills, itemSkill => skill.id == itemSkill.id);

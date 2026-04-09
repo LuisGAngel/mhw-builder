@@ -1,0 +1,302 @@
+@import "../../../sass/variables";
+
+.solver-container {
+	padding: 8px;
+
+	h3 {
+		margin: 0 0 12px 0;
+		color: #e0e0e0;
+	}
+}
+
+.section {
+	margin-bottom: 12px;
+}
+
+.section-label {
+	display: block;
+	font-size: 12px;
+	color: #aaa;
+	margin-bottom: 4px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+// Rarity checkboxes
+.rarity-checkboxes {
+	display: flex;
+	gap: 8px;
+}
+
+.rarity-checkbox {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	padding: 4px 8px;
+	background-color: #323232;
+	border-radius: 3px;
+	cursor: pointer;
+	font-size: 13px;
+
+	&.checked {
+		background-color: #525252;
+		color: #7cc576;
+	}
+
+	.checkbox-icon {
+		font-size: 12px;
+	}
+}
+
+// Skill search
+.skill-search {
+	position: relative;
+}
+
+.skill-search-input {
+	width: 100%;
+	padding: 6px 8px;
+	background-color: #323232;
+	border: 1px solid #525252;
+	color: #e0e0e0;
+	border-radius: 3px;
+	font-size: 13px;
+	box-sizing: border-box;
+
+	&:focus {
+		outline: none;
+		border-color: #7cc576;
+	}
+}
+
+.skill-dropdown {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	background-color: #2a2a2a;
+	border: 1px solid #525252;
+	border-top: none;
+	border-radius: 0 0 3px 3px;
+	max-height: 200px;
+	overflow-y: auto;
+	z-index: 100;
+}
+
+.skill-option {
+	padding: 6px 8px;
+	cursor: pointer;
+	font-size: 13px;
+
+	&:hover {
+		background-color: #3a3a3a;
+	}
+}
+
+// Required skills list
+.required-skills-list {
+	margin-top: 6px;
+}
+
+.required-skill-item {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 4px 6px;
+	background-color: #2a2a2a;
+	border-radius: 3px;
+	margin-bottom: 3px;
+}
+
+.skill-name {
+	flex: 1;
+	font-size: 13px;
+}
+
+.level-controls {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.level-btn {
+	padding: 2px 6px !important;
+	font-size: 10px;
+	background-color: #424242;
+	color: #e0e0e0 !important;
+	border-radius: 2px;
+
+	&:hover {
+		background-color: #525252;
+	}
+}
+
+.level-value {
+	font-size: 13px;
+	min-width: 36px;
+	text-align: center;
+	color: #7cc576;
+}
+
+.remove-btn {
+	padding: 2px 6px !important;
+	font-size: 10px;
+	color: #e57373 !important;
+
+	&:hover {
+		color: #ff8a80 !important;
+	}
+}
+
+// Charm select
+.charm-select {
+	width: 100%;
+	padding: 6px 8px;
+	background-color: #323232;
+	border: 1px solid #525252;
+	color: #e0e0e0;
+	border-radius: 3px;
+	font-size: 13px;
+
+	option {
+		background-color: #323232;
+	}
+}
+
+// Search button
+.search-button {
+	width: 100%;
+	padding: 8px 16px !important;
+	background-color: #4a7c59;
+	color: #e0e0e0 !important;
+	border-radius: 3px;
+	font-size: 14px;
+	cursor: pointer;
+
+	&:hover {
+		background-color: #5a9c69;
+	}
+
+	&:disabled {
+		background-color: #3a3a3a;
+		cursor: wait;
+	}
+
+	i {
+		margin-right: 6px;
+	}
+}
+
+.error-message {
+	color: #e57373;
+	font-size: 13px;
+	margin-bottom: 8px;
+	padding: 6px 8px;
+	background-color: rgba(229, 115, 115, 0.1);
+	border-radius: 3px;
+}
+
+// Results
+.results-container {
+	margin-top: 8px;
+}
+
+.results-header {
+	font-size: 13px;
+	color: #aaa;
+	margin-bottom: 8px;
+	padding-bottom: 4px;
+	border-bottom: 1px solid #424242;
+}
+
+.result-card {
+	background-color: #2a2a2a;
+	border: 1px solid #3a3a3a;
+	border-radius: 4px;
+	padding: 8px;
+	margin-bottom: 6px;
+	cursor: pointer;
+
+	&:hover {
+		border-color: #525252;
+		background-color: #303030;
+	}
+}
+
+.result-number {
+	font-size: 11px;
+	color: #7cc576;
+	margin-bottom: 4px;
+	font-weight: bold;
+}
+
+.armor-pieces {
+	.piece {
+		display: flex;
+		gap: 6px;
+		font-size: 12px;
+		line-height: 1.6;
+	}
+
+	.piece-type {
+		color: #888;
+		min-width: 45px;
+	}
+
+	.piece-name {
+		color: #e0e0e0;
+	}
+}
+
+.decorations {
+	margin-top: 4px;
+	padding-top: 4px;
+	border-top: 1px solid #3a3a3a;
+	font-size: 12px;
+
+	.deco-label {
+		color: #888;
+		margin-right: 4px;
+	}
+
+	.deco-item {
+		display: inline-block;
+		background-color: #3a3a3a;
+		padding: 1px 6px;
+		border-radius: 2px;
+		margin: 1px 2px;
+		color: #90caf9;
+		font-size: 11px;
+	}
+}
+
+.result-stats {
+	margin-top: 4px;
+	font-size: 11px;
+	color: #aaa;
+	display: flex;
+	gap: 12px;
+}
+
+.result-skills {
+	margin-top: 4px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+
+	.result-skill {
+		display: inline-block;
+		background-color: #3a4a3a;
+		padding: 1px 6px;
+		border-radius: 2px;
+		font-size: 11px;
+		color: #a5d6a7;
+	}
+}
+
+.no-results {
+	color: #888;
+	font-size: 13px;
+	text-align: center;
+	padding: 16px;
+}

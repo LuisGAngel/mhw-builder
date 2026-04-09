@@ -22,7 +22,7 @@ $tabsHeight: 34px;
 	right: 0;
 	border-bottom: 4px #525252 solid;
 	display: none;
-	grid-template-columns: repeat(3, 1fr) 40px;
+	grid-template-columns: repeat(3, 1fr) 40px 40px;
 	grid-gap: 4px;
 
 	.tab {

@@ -1,6 +1,7 @@
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { VirtualScrollerModule } from 'ngx-virtual-scroller';
 import { AppComponent } from './app.component';
@@ -37,6 +38,7 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { UpgradeSlotComponent } from './components/upagrade-slot/upgrade-slot.component';
 import { UpgradeDetailsComponent } from './components/upgrade-details/upgrade-details.component';
 import { UpgradesListComponent } from './components/upgrades-list/upgrades-list.component';
+import { BuildSolverComponent } from './components/build-solver/build-solver.component';
 import { WeaponListComponent } from './components/weapon-list/weapon-list.component';
 import { DataModule } from './data/data.module';
 import { NumbersArrPipe } from './pipes/numberArr.pipe';
@@ -49,6 +51,7 @@ import { SetService } from './services/set.service';
 import { SkillService } from './services/skill.service';
 import { SlotService } from './services/slot.service';
 import { StatService } from './services/stat.service';
+import { BuildSolverService } from './services/build-solver.service';
 import { TooltipService } from './services/tooltip.service';
 
 @NgModule({
@@ -88,9 +91,11 @@ import { TooltipService } from './services/tooltip.service';
 		SharpnessBarComponent,
 		SetListComponent,
 		NumbersArrPipe,
+		BuildSolverComponent,
 	],
 	imports: [
 		BrowserModule,
+		FormsModule,
 		HttpClientModule,
 		VirtualScrollerModule,
 		DataModule,
@@ -108,6 +113,7 @@ import { TooltipService } from './services/tooltip.service';
 		CalculationService,
 		BuildService,
 		SetService,
+		BuildSolverService,
 		AppDataProvider,
 		{ provide: APP_INITIALIZER, useFactory: appDataProviderFactory, deps: [AppDataProvider], multi: true }
 	],
