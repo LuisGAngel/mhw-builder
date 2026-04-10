@@ -2,6 +2,8 @@
 
 A Monster Hunter World armor/build planner built with Angular. Plan your builds, compare stats, and optimize your loadout.
 
+**Live App:** https://luisgangel.github.io/mhw-builder/
+
 ## What's New
 
 This fork extends the original project with multiple quality-of-life features:
