@@ -34,15 +34,15 @@ export class SlotService {
 	public decorationSelected$ = new Subject<SlotEventModel<DecorationSlotComponent, DecorationModel>>();
 	public augmentationSelected$ = new Subject<SlotEventModel<AugmentationSlotComponent, AugmentationModel>>();
 	public upgradeSelected$ = new Subject<SlotEventModel<UpgradeSlotComponent, UpgradeContainerModel>>();
-	public setbonusSelected$ = new Subject();
+	public setbonusSelected$ = new Subject<any>();
 	public modificationSelected$ = new Subject<SlotEventModel<ModificationSlotComponent, ModificationModel>>();
 	public kinsectSelected$ = new Subject<SlotEventModel<KinsectSlotComponent, KinsectModel>>();
-	public itemLevelChanged$ = new Subject();
-	public itemActiveChanged$ = new Subject();
-	public weaponSlotSelected$ = new Subject();
-	public armorSlotSelected$ = new Subject();
+	public itemLevelChanged$ = new Subject<void>();
+	public itemActiveChanged$ = new Subject<void>();
+	public weaponSlotSelected$ = new Subject<void>();
+	public armorSlotSelected$ = new Subject<void>();
 
-	public weaponModSelected$ = new Subject();
+	public weaponModSelected$ = new Subject<any>();
 
 	weaponSlot: ItemSlotComponent;
 	headSlot: ItemSlotComponent;

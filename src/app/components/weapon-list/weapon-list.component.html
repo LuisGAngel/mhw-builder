@@ -108,9 +108,8 @@
 		</button>
 	</div>
 
-	<virtual-scroller id="items-list" #itemList class="scroll-container" *ngIf="items" [items]="filteredItems"
-		(vsUpdate)="onItemListUpdate($event)" [enableUnequalChildrenSizes]="true" [bufferAmount]="10">
-		<div *ngFor="let item of virtualItems" class="scroll-item-container" (click)="selectItem(item)">
+	<cdk-virtual-scroll-viewport itemSize="80" class="scroll-container" *ngIf="items">
+		<div *cdkVirtualFor="let item of filteredItems" class="scroll-item-container" (click)="selectItem(item)">
 			<div class="name-container">
 				<div class="name" [ngClass]="'vColor-'+ item.vColor">
 					{{item.name}}
@@ -247,5 +246,5 @@
 				</div>
 			</div>
 		</div>
-	</virtual-scroller>
+	</cdk-virtual-scroll-viewport>
 </div>

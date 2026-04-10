@@ -15,6 +15,7 @@ import { WeaponType } from '../../types/weapon.type';
 import { DropdownComponent } from '../common/dropdown/dropdown.component';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-awakening-slot',
 	templateUrl: './awakening-slot.component.html',
 	styleUrls: ['./awakening-slot.component.scss']

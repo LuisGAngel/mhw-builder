@@ -6,6 +6,7 @@ import { ItemType } from '../../types/item.type';
 import { PointerType } from '../../types/pointer.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-upgrade-slot',
 	templateUrl: './upgrade-slot.component.html',
 	styleUrls: ['./upgrade-slot.component.scss']

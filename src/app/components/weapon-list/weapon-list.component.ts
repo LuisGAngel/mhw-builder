@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { ItemModel } from '../../models/item.model';
 import { SkillModel } from '../../models/skill.model';
 import { DataService } from '../../services/data.service';
@@ -10,6 +9,7 @@ import { ItemType } from '../../types/item.type';
 import { WeaponType } from '../../types/weapon.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-weapon-list',
 	templateUrl: './weapon-list.component.html',
 	styleUrls: ['./weapon-list.component.scss']
@@ -40,13 +40,11 @@ export class WeaponListComponent implements OnInit {
 	@Output() itemSelected = new EventEmitter<ItemModel>();
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('itemList') itemList: VirtualScrollerComponent;
 
 	items: ItemModel[];
 	itemsWorld: ItemModel[];
 	itemsIceborne: ItemModel[];
 	filteredItems: ItemModel[];
-	virtualItems: ItemModel[];
 	weaponTypeFilter?: WeaponType;
 	weaponTypeSort: String;
 
@@ -57,7 +55,6 @@ export class WeaponListComponent implements OnInit {
 
 	@HostListener('window:resize')
 	onResize() {
-		this.refreshList();
 	}
 
 	constructor(
@@ -74,16 +71,6 @@ export class WeaponListComponent implements OnInit {
 				this.searchBox.nativeElement.select();
 			}, 250);
 		});
-	}
-
-	refreshList() {
-		if (this.itemList) {
-			this.itemList.refresh();
-		}
-	}
-
-	onItemListUpdate(items: ItemModel[]) {
-		this.virtualItems = items;
 	}
 
 	loadItems() {
@@ -224,7 +211,6 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	weaponSortByAffinity() {
@@ -238,7 +224,6 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	weaponSortByAilment() {
@@ -252,7 +237,6 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	weaponSortByElement() {
@@ -266,7 +250,6 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	weaponSortByDefense() {
@@ -280,7 +263,6 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	weaponSortBySharpness() {
@@ -310,7 +292,6 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	weaponSortBySlots() {
@@ -346,6 +327,5 @@ export class WeaponListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 }

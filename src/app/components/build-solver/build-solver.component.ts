@@ -8,6 +8,7 @@ import { ItemModel } from '../../models/item.model';
 import { SlotService } from '../../services/slot.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-build-solver',
 	templateUrl: './build-solver.component.html',
 	styleUrls: ['./build-solver.component.scss']

@@ -1,6 +1,7 @@
 import { Component, HostBinding, HostListener, Input, OnInit } from '@angular/core';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-modal',
 	templateUrl: './modal.component.html',
 	styleUrls: ['./modal.component.scss']

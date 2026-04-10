@@ -6,6 +6,7 @@ import { SlotService } from '../../services/slot.service';
 import { WeaponType } from '../../types/weapon.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-upgrades-list',
 	templateUrl: './upgrades-list.component.html',
 	styleUrls: ['./upgrades-list.component.scss']

@@ -1,5 +1,4 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { ItemModel } from '../../models/item.model';
 import { SkillModel } from '../../models/skill.model';
 import { DataService } from '../../services/data.service';
@@ -8,6 +7,7 @@ import { EquipmentCategoryType } from '../../types/equipment-category.type';
 import { ItemType } from '../../types/item.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-armor-list',
 	templateUrl: './armor-list.component.html',
 	styleUrls: ['./armor-list.component.scss']
@@ -35,13 +35,11 @@ export class ArmorListComponent implements OnInit {
 	get onlyIceborne(): boolean { return this._onlyIceborne; }
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('itemList') itemList: VirtualScrollerComponent;
 
 	itemsAll: ItemModel[];
 	itemsWorld: ItemModel[];
 	itemsIceborne: ItemModel[];
 	filteredItems: ItemModel[];
-	virtualItems: ItemModel[];
 	armorTypeSort: string;
 
 	headId = 0;
@@ -55,7 +53,6 @@ export class ArmorListComponent implements OnInit {
 
 	@HostListener('window:resize')
 	onResize() {
-		this.refreshList();
 	}
 
 	constructor(
@@ -85,16 +82,6 @@ export class ArmorListComponent implements OnInit {
 			}, 250);
 		});
 		this.getArmorIds();
-	}
-
-	refreshList() {
-		if (this.itemList) {
-			this.itemList.refresh();
-		}
-	}
-
-	onItemListUpdate(items: ItemModel[]) {
-		this.virtualItems = items;
 	}
 
 	loadItems() {
@@ -325,7 +312,6 @@ export class ArmorListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	sortByResistance(type: string) {
@@ -357,7 +343,6 @@ export class ArmorListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	sortBySlots() {
@@ -393,6 +378,5 @@ export class ArmorListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 }

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CommonModel } from '../../models/common.model';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-common-details',
 	templateUrl: './common-details.component.html',
 	styleUrls: ['./common-details.component.scss']

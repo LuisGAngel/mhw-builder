@@ -3,6 +3,7 @@ import { EquipmentService } from 'src/app/services/equipment.service';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-equipped-buffs',
 	templateUrl: './equipped-buffs.component.html',
 	styleUrls: ['./equipped-buffs.component.scss']

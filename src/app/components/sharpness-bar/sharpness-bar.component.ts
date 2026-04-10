@@ -4,6 +4,7 @@ import { SharpnessModel } from 'src/app/models/sharpness-model';
 import { TooltipService } from 'src/app/services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-sharpness-bar',
 	templateUrl: './sharpness-bar.component.html',
 	styleUrls: ['./sharpness-bar.component.scss']

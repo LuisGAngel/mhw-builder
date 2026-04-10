@@ -1,6 +1,7 @@
 import { Component, ContentChildren, ElementRef, OnInit, QueryList, ViewChild } from '@angular/core';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-dropdown',
 	templateUrl: './dropdown.component.html',
 	styleUrls: ['./dropdown.component.scss']

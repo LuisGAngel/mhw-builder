@@ -526,7 +526,7 @@ export class StatService {
 				if (level) {
 					if (level.recoil) { this.stats.recoil += level.recoil; }
 					if (level.reload) { this.stats.reload += level.reload; }
-					if (level.deviation) { this.stats.deviation += level.deviation; }
+					if ((level as any).deviation) { this.stats.deviation += (level as any).deviation; }
 				}
 			}
 		}

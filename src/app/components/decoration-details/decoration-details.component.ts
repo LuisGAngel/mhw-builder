@@ -6,6 +6,7 @@ import { DataService } from '../../services/data.service';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-decoration-details',
 	templateUrl: './decoration-details.component.html',
 	styleUrls: ['./decoration-details.component.scss']

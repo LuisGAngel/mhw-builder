@@ -6,6 +6,7 @@ import { TooltipService } from '../../services/tooltip.service';
 import { PointerType } from '../../types/pointer.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-modifications-list',
 	templateUrl: './modifications-list.component.html',
 	styleUrls: ['./modifications-list.component.scss']

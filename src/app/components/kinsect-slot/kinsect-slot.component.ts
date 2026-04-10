@@ -9,6 +9,7 @@ import { PointerType } from '../../types/pointer.type';
 import { DropdownComponent } from '../common/dropdown/dropdown.component';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-kinsect-slot',
 	templateUrl: './kinsect-slot.component.html',
 	styleUrls: ['./kinsect-slot.component.scss']

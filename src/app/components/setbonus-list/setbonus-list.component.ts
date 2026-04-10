@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { EquippedSetBonusDetailModel } from '../../models/equipped-set-bonus.model';
 import { SetBonusModel } from '../../models/set-bonus.model';
 import { SkillModel } from '../../models/skill.model';
@@ -10,6 +9,7 @@ import { TooltipService } from '../../services/tooltip.service';
 import { ModeType } from '../../types/mode.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-setbonus-list',
 	templateUrl: './setbonus-list.component.html',
 	styleUrls: ['./setbonus-list.component.scss']
@@ -18,15 +18,12 @@ export class SetbonusListComponent implements OnInit {
 	@Output() setbonusSelected = new EventEmitter<SetBonusModel>();
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('setbonusList') setbonusList: VirtualScrollerComponent;
 
 	setbonuses: SetBonusModel[];
 	filteredSetbonuses: SetBonusModel[];
-	virtualSetbonuses: SetBonusModel[];
 
 	@HostListener('window:resize')
 	onResize() {
-		this.refreshList();
 	}
 
 	constructor(
@@ -37,16 +34,6 @@ export class SetbonusListComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.loadItems();
-	}
-
-	refreshList() {
-		if (this.setbonusList) {
-			this.setbonusList.refresh();
-		}
-	}
-
-	onSetbonusListUpdate(setbonuses: SetBonusModel[]) {
-		this.virtualSetbonuses = setbonuses;
 	}
 
 	loadItems() {

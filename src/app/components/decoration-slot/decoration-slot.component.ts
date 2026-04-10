@@ -6,6 +6,7 @@ import { ItemType } from '../../types/item.type';
 import { PointerType } from '../../types/pointer.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-decoration-slot',
 	templateUrl: './decoration-slot.component.html',
 	styleUrls: ['./decoration-slot.component.scss'],

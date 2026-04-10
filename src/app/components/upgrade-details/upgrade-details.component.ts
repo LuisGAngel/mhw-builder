@@ -4,6 +4,7 @@ import { UpgradeContainerModel } from '../../models/upgrade-container.model';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-upgrade-details',
 	templateUrl: './upgrade-details.component.html',
 	styleUrls: ['./upgrade-details.component.scss']

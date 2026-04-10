@@ -12,6 +12,7 @@ import { WeaponType } from '../../types/weapon.type';
 import { UpgradeContainerModel } from '../../models/upgrade-container.model';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-tooltip',
 	templateUrl: './tooltip.component.html',
 	styleUrls: ['./tooltip.component.scss']

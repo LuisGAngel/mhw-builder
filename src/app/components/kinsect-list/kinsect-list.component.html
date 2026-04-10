@@ -31,8 +31,8 @@
 		</button>
 	</div>
 
-	<virtual-scroller id="kinsects-list" #itemList class="scroll-container" *ngIf="kinsects" [items]="filteredKinsects" (vsUpdate)="onKinsectListUpdate($event)">
-		<div *ngFor="let kinsect of virtualKinsects" class="scroll-item-container" (click)="selectKinsect(kinsect)">
+	<cdk-virtual-scroll-viewport itemSize="50" class="scroll-container" *ngIf="kinsects">
+		<div *cdkVirtualFor="let kinsect of filteredKinsects" class="scroll-item-container" (click)="selectKinsect(kinsect)">
 			<div class="name-container">
 				<div class="name" [ngClass]="{'ver-52':kinsect.id==6}">
 					{{kinsect.name}}
@@ -82,5 +82,5 @@
 				</div>
 			</div>
 		</div>
-	</virtual-scroller>
+	</cdk-virtual-scroll-viewport>
 </div>

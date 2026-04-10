@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { forkJoin, Observable, Observer } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import { AmmoCapacitiesLoader } from '../data/loaders/ammo-capacities.loader';
 import { ArmorLoader } from '../data/loaders/armor.loader';
 import { AugmentationsLoader } from '../data/loaders/augmentations.loader';
@@ -18,7 +19,6 @@ import { UpgradesLoader } from '../data/loaders/upgrades.loader';
 import { WeaponModifiersLoader } from '../data/loaders/weapon-modifiers.loader';
 import { WeaponsLoader } from '../data/loaders/weapons.loader';
 import { AppDataModel } from '../models/app-data.model';
-import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AppDataProvider {
@@ -49,16 +49,16 @@ export class AppDataProvider {
 	load(): Observable<boolean> {
 		return new Observable((observer: Observer<boolean>) => {
 			Promise.all([
-				this.weaponLoader.load('weapons.tsv', false).toPromise(),
-				this.armorLoader.load('armor.tsv', false).toPromise(),
-				this.charmsLoader.load('charms.tsv', false).toPromise(),
-				this.decorationsLoader.load('decorations.tsv', false).toPromise(),
-				this.augmentationsLoader.load('augmentations.json', false).toPromise(),
-				this.modificationsLoader.load('modifications.json', false).toPromise(),
-				this.kinsectsLoader.load('kinsects.tsv', false).toPromise(),
-				this.skillsLoader.load('skills.json', false).toPromise(),
-				this.setBonusesLoader.load('set-bonuses.json', false).toPromise(),
-				this.sharpnessModifiersLoader.load('sharpness-modifiers.json', false).toPromise(),
+				lastValueFrom(this.weaponLoader.load('weapons.tsv', false)),
+				lastValueFrom(this.armorLoader.load('armor.tsv', false)),
+				lastValueFrom(this.charmsLoader.load('charms.tsv', false)),
+				lastValueFrom(this.decorationsLoader.load('decorations.tsv', false)),
+				lastValueFrom(this.augmentationsLoader.load('augmentations.json', false)),
+				lastValueFrom(this.modificationsLoader.load('modifications.json', false)),
+				lastValueFrom(this.kinsectsLoader.load('kinsects.tsv', false)),
+				lastValueFrom(this.skillsLoader.load('skills.json', false)),
+				lastValueFrom(this.setBonusesLoader.load('set-bonuses.json', false)),
+				lastValueFrom(this.sharpnessModifiersLoader.load('sharpness-modifiers.json', false)),
 			]).then(results => {
 				this.appData.weapons = results[0];
 				this.appData.armors = results[1];
@@ -72,13 +72,13 @@ export class AppDataProvider {
 				this.appData.sharpnessModifiers = results[9];
 
 				Promise.all([
-					this.weaponModifiersLoader.load('weapon-modifiers.json', false).toPromise(),
-					this.ammoCapacitiesLoader.load('ammo-capacities.json', false).toPromise(),
-					this.melodiesLoader.load('melodies.tsv', false).toPromise(),
-					this.melodyEffectLoader.load('melody-effect.tsv', false).toPromise(),
-					this.toolsLoader.load('tools.tsv', false).toPromise(),
-					this.upgradesLoader.load('upgrades.json', false).toPromise(),
-					this.awakeningsLoader.load('awakenings.json', false).toPromise()
+					lastValueFrom(this.weaponModifiersLoader.load('weapon-modifiers.json', false)),
+					lastValueFrom(this.ammoCapacitiesLoader.load('ammo-capacities.json', false)),
+					lastValueFrom(this.melodiesLoader.load('melodies.tsv', false)),
+					lastValueFrom(this.melodyEffectLoader.load('melody-effect.tsv', false)),
+					lastValueFrom(this.toolsLoader.load('tools.tsv', false)),
+					lastValueFrom(this.upgradesLoader.load('upgrades.json', false)),
+					lastValueFrom(this.awakeningsLoader.load('awakenings.json', false))
 				]).then(results2 => {
 					this.appData.weaponModifiers = results2[0];
 					this.appData.ammoCapacities = results2[1];

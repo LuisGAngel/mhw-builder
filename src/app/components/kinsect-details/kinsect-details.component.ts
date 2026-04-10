@@ -5,6 +5,7 @@ import { KinsectModel } from '../../models/kinsect.model';
 import { StatDetailModel } from '../../models/stat-detail.model';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-kinsect-details',
 	templateUrl: './kinsect-details.component.html',
 	styleUrls: ['./kinsect-details.component.scss']

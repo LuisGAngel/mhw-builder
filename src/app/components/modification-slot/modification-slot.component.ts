@@ -6,6 +6,7 @@ import { ItemType } from 'src/app/types/item.type';
 import { PointerType } from 'src/app/types/pointer.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-modification-slot',
 	templateUrl: './modification-slot.component.html',
 	styleUrls: ['./modification-slot.component.scss']

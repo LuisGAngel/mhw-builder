@@ -6,8 +6,8 @@
 		</button>
 	</div>
 
-	<virtual-scroller id="setbonuses-list" #setbonusList class="scroll-container" *ngIf="setbonuses" [items]="filteredSetbonuses" (vsUpdate)="onSetbonusListUpdate($event)">
-		<div *ngFor="let setbonus of virtualSetbonuses" class="scroll-item-container" (click)="selectSetbonus(setbonus)">
+	<cdk-virtual-scroll-viewport itemSize="50" class="scroll-container" *ngIf="setbonuses">
+		<div *cdkVirtualFor="let setbonus of filteredSetbonuses" class="scroll-item-container" (click)="selectSetbonus(setbonus)">
 			<div class="name-container">
 				<div class="name">
 					{{setbonus.name}}
@@ -40,5 +40,5 @@
 				</div>
 			</div>
 		</div>
-	</virtual-scroller>
+	</cdk-virtual-scroll-viewport>
 </div>

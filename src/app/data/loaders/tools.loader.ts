@@ -22,7 +22,7 @@ export class ToolsLoader extends DataLoader<ToolModel> {
 				parser: new SlotsParser()
 			}
 		]);
-		_.each(items, tool => {
+		_.each(items, (tool: any) => {
 			tool.equipmentCategory = EquipmentCategoryType.Tool;
 		});
 		return items;

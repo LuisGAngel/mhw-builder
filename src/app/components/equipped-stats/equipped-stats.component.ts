@@ -11,6 +11,7 @@ import { PointerType } from '../../types/pointer.type';
 import { SharpnessBarComponent } from '../sharpness-bar/sharpness-bar.component';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-equipped-stats',
 	templateUrl: './equipped-stats.component.html',
 	styleUrls: ['./equipped-stats.component.scss']

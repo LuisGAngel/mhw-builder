@@ -8,6 +8,7 @@ import { ModeType } from '../../types/mode.type';
 import { PointerType } from '../../types/pointer.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-equipped-skills',
 	templateUrl: './equipped-skills.component.html',
 	styleUrls: ['./equipped-skills.component.scss']

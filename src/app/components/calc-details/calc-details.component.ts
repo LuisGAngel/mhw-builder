@@ -3,6 +3,7 @@ import { StatDetailModel } from '../../models/stat-detail.model';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-calc-details',
 	templateUrl: './calc-details.component.html',
 	styleUrls: ['./calc-details.component.scss'],

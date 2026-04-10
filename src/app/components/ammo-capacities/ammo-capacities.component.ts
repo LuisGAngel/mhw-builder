@@ -4,6 +4,7 @@ import { AmmoCapacitiesModel, AmmoLevelModel } from '../../models/ammo-capacitie
 import { DeviationType, RecoilType, ReloadType } from '../../types/deviation.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-ammo-capacities',
 	templateUrl: './ammo-capacities.component.html',
 	styleUrls: ['./ammo-capacities.component.scss']

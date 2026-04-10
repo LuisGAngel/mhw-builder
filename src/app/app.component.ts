@@ -15,6 +15,7 @@ import { ItemType } from './types/item.type';
 import { PointerType } from './types/pointer.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss']

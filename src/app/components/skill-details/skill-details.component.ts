@@ -4,6 +4,7 @@ import { SkillModel } from '../../models/skill.model';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-skill-details',
 	templateUrl: './skill-details.component.html',
 	styleUrls: ['./skill-details.component.scss']

@@ -1,9 +1,9 @@
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { VirtualScrollerModule } from 'ngx-virtual-scroller';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { AppComponent } from './app.component';
 import { AmmoCapacitiesComponent } from './components/ammo-capacities/ammo-capacities.component';
 import { ArmorListComponent } from './components/armor-list/armor-list.component';
@@ -96,12 +96,12 @@ import { TooltipService } from './services/tooltip.service';
 	imports: [
 		BrowserModule,
 		FormsModule,
-		HttpClientModule,
-		VirtualScrollerModule,
+		ScrollingModule,
 		DataModule,
 		CommonModule
 	],
 	providers: [
+		provideHttpClient(),
 		Location,
 		{ provide: LocationStrategy, useClass: PathLocationStrategy },
 		DataService,
@@ -121,6 +121,8 @@ import { TooltipService } from './services/tooltip.service';
 })
 export class AppModule { }
 
+import { lastValueFrom } from 'rxjs';
+
 export function appDataProviderFactory(provider: AppDataProvider) {
-	return () => provider.load().toPromise();
+	return () => lastValueFrom(provider.load());
 }

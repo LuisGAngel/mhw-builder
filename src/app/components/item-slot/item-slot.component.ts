@@ -19,6 +19,7 @@ import { ModificationSlotComponent } from '../modification-slot/modification-slo
 import { UpgradeSlotComponent } from '../upagrade-slot/upgrade-slot.component';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-item-slot',
 	templateUrl: './item-slot.component.html',
 	styleUrls: ['./item-slot.component.scss']

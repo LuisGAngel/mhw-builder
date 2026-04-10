@@ -10,6 +10,7 @@ import { ItemType } from '../../types/item.type';
 import { WeaponType } from '../../types/weapon.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-item-details',
 	templateUrl: './item-details.component.html',
 	styleUrls: ['./item-details.component.scss']

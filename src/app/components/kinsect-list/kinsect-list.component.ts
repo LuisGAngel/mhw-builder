@@ -1,12 +1,12 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { ElementType } from 'src/app/types/element.type';
 import { KinsectModel } from '../../models/kinsect.model';
 import { DataService } from '../../services/data.service';
 import { SlotService } from '../../services/slot.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-kinsect-list',
 	templateUrl: './kinsect-list.component.html',
 	styleUrls: ['./kinsect-list.component.scss']
@@ -15,20 +15,17 @@ export class KinsectListComponent implements OnInit {
 	onlyIceborne = true;
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('itemList') itemList: VirtualScrollerComponent;
 
 	kinsects: KinsectModel[];
 	kinsectsWorld: KinsectModel[];
 	kinsectsIceborne: KinsectModel[];
 	filteredKinsects: KinsectModel[];
-	virtualKinsects: KinsectModel[];
 
 	showSortContainer = true;
 	sortType = '';
 
 	@HostListener('window:resize')
 	onResize() {
-		this.refreshList();
 	}
 
 	constructor(
@@ -38,12 +35,6 @@ export class KinsectListComponent implements OnInit {
 
 	ngOnInit() {
 		this.loadKinsects();
-	}
-
-	refreshList() {
-		if (this.itemList) {
-			this.itemList.refresh();
-		}
 	}
 
 	loadKinsects() {
@@ -87,10 +78,6 @@ export class KinsectListComponent implements OnInit {
 		this.applyIceborneFilter();
 	}
 
-	onKinsectListUpdate(kinsects: KinsectModel[]) {
-		this.virtualKinsects = kinsects;
-	}
-
 	selectKinsect(kinsect: KinsectModel) {
 		const newKinsect = Object.assign({}, kinsect);
 		newKinsect.element = ElementType.None;
@@ -108,6 +95,5 @@ export class KinsectListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualKinsects = this.filteredKinsects;
 	}
 }

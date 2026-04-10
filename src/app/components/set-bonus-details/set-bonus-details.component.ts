@@ -3,6 +3,7 @@ import { EquippedSetBonusModel } from '../../models/equipped-set-bonus.model';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-set-bonus-details',
 	templateUrl: './set-bonus-details.component.html',
 	styleUrls: ['./set-bonus-details.component.scss']

@@ -135,3 +135,11 @@ This builds with `--base-href /mhw-builder/` and deploys the `dist/` folder to t
 - Item types for armor: `Head`, `Chest`, `Arms`, `Waist`, `Legs`
 - Decoration `level` = jewel size (1–4), matched against slot sizes on equipment
 - Skills are referenced by `SkillReferenceModel` (skill ID + level) throughout the codebase
+
+## Validation
+
+After completing any code change, the agent must:
+
+1. Run `npm start` to start the dev server on `http://localhost:4200/`
+1. Use the Chrome DevTools MCP server to navigate to the app, take a screenshot, and check the browser console for errors
+1. If errors are found, fix them before considering the task complete

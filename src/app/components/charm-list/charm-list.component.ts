@@ -1,6 +1,5 @@
 import { Component, ElementRef, HostListener, Input, OnInit, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { ItemModel } from '../../models/item.model';
 import { SkillModel } from '../../models/skill.model';
 import { DataService } from '../../services/data.service';
@@ -9,6 +8,7 @@ import { EquipmentCategoryType } from '../../types/equipment-category.type';
 import { ItemType } from '../../types/item.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-charm-list',
 	templateUrl: './charm-list.component.html',
 	styleUrls: ['./charm-list.component.scss']
@@ -26,15 +26,12 @@ export class CharmListComponent implements OnInit {
 	get itemType(): ItemType { return this._itemType; }
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('itemList') itemList: VirtualScrollerComponent;
 
 	items: ItemModel[];
 	filteredItems: ItemModel[];
-	virtualItems: ItemModel[];
 
 	@HostListener('window:resize')
 	onResize() {
-		this.refreshList();
 	}
 
 	constructor(
@@ -43,12 +40,6 @@ export class CharmListComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void { }
-
-	refreshList() {
-		if (this.itemList) {
-			this.itemList.refresh();
-		}
-	}
 
 	loadItems() {
 		this.items = this.dataService.getCharms();
@@ -88,10 +79,6 @@ export class CharmListComponent implements OnInit {
 	resetSearchResults() {
 		this.searchBox.nativeElement.value = null;
 		this.filteredItems = this.items;
-	}
-
-	onItemListUpdate(items: ItemModel[]) {
-		this.virtualItems = items;
 	}
 
 	selectItem(item: ItemModel) {

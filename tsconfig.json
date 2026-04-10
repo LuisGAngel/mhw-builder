@@ -5,23 +5,18 @@
 		"outDir": "./dist/out-tsc",
 		"sourceMap": true,
 		"declaration": false,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"emitDecoratorMetadata": true,
+		"module": "es2022",
+		"moduleResolution": "bundler",
 		"experimentalDecorators": true,
-		"target": "es2015",
+		"target": "es2022",
+		"useDefineForClassFields": false,
 		"typeRoots": [
 			"node_modules/@types"
 		],
 		"lib": [
-			"es2018",
+			"es2022",
 			"dom"
-		],
-		"paths": {
-			"core-js/es7/reflect": [
-				"node_modules/core-js/proposals/reflect-metadata"
-			]
-		}
+		]
 	},
 	"exclude": [
 		"dist"

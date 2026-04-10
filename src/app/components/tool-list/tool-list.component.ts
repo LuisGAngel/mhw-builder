@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { ToolModel } from 'src/app/models/tool.model';
 import { ItemModel } from '../../models/item.model';
 import { DataService } from '../../services/data.service';
@@ -10,6 +9,7 @@ import { ItemType } from '../../types/item.type';
 import { ToolType } from '../../types/tool.type';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-tool-list',
 	templateUrl: './tool-list.component.html',
 	styleUrls: ['./tool-list.component.scss']
@@ -30,11 +30,9 @@ export class ToolListComponent implements OnInit {
 	@Output() itemSelected = new EventEmitter<ItemModel>();
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('itemList') itemList: VirtualScrollerComponent;
 
 	items: ToolModel[];
 	filteredItems: ToolModel[];
-	virtualItems: ToolModel[];
 	toolTypeFilter?: ToolType;
 	weaponTypeSort: String;
 
@@ -48,16 +46,6 @@ export class ToolListComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-	}
-
-	refreshList() {
-		if (this.itemList) {
-			this.itemList.refresh();
-		}
-	}
-
-	onItemListUpdate(items: ToolModel[]) {
-		this.virtualItems = items;
 	}
 
 	loadItems() {
@@ -114,7 +102,6 @@ export class ToolListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	sortByRecharge() {
@@ -128,7 +115,6 @@ export class ToolListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 
 	sortBySlots() {
@@ -164,6 +150,5 @@ export class ToolListComponent implements OnInit {
 				return 0;
 			}
 		});
-		this.virtualItems = this.filteredItems;
 	}
 }

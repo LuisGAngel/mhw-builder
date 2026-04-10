@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import * as _ from 'lodash';
-import { VirtualScrollerComponent } from 'ngx-virtual-scroller';
 import { DecorationModel } from '../../models/decoration.model';
 import { SkillModel } from '../../models/skill.model';
 import { DataService } from '../../services/data.service';
@@ -8,6 +7,7 @@ import { SlotService } from '../../services/slot.service';
 import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
+	standalone: false,
 	selector: 'mhw-builder-decoration-list',
 	templateUrl: './decoration-list.component.html',
 	styleUrls: ['./decoration-list.component.scss']
@@ -25,15 +25,12 @@ export class DecorationListComponent implements OnInit {
 	@Output() decorationSelected = new EventEmitter<DecorationModel>();
 
 	@ViewChild('searchBox', { static: true }) searchBox: ElementRef;
-	@ViewChild('decorationList') decorationList: VirtualScrollerComponent;
 
 	decorations: DecorationModel[];
 	filteredDecorations: DecorationModel[];
-	virtualDecorations: DecorationModel[];
 
 	@HostListener('window:resize')
 	onResize() {
-		this.refreshList();
 	}
 
 	constructor(
@@ -43,16 +40,6 @@ export class DecorationListComponent implements OnInit {
 	) { }
 
 	ngOnInit(): void { }
-
-	refreshList() {
-		if (this.decorationList) {
-			this.decorationList.refresh();
-		}
-	}
-
-	onDecorationListUpdate(decorations: DecorationModel[]) {
-		this.virtualDecorations = decorations;
-	}
 
 	loadItems() {
 		this.decorations = this.dataService.getDecorations(this.decorationLevel);

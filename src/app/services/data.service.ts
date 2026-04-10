@@ -67,8 +67,8 @@ export class DataService {
 		return _.find(this.appDataProvider.appData.charms, charm => charm.id === id);
 	}
 
-	getTool(id: number, type: ItemType): ItemModel {
-		const item = _.find(this.appDataProvider.appData.tools, tool => tool.id === id);
+	getTool(id: number, type: ItemType): any {
+		const item = _.find(this.appDataProvider.appData.tools, tool => tool.id === id) as any;
 		item.itemType = type;
 		return item;
 	}
@@ -83,7 +83,7 @@ export class DataService {
 
 	getTools(type: ItemType): ToolModel[] {
 		const items = this.appDataProvider.appData.tools.map(x => Object.assign({}, x));
-		_.each(items, tool => {
+		_.each(items, (tool: any) => {
 			tool.itemType = type;
 		});
 		return items;
@@ -133,7 +133,7 @@ export class DataService {
 
 	getSharpnessModifier(damageType: DamageType, colorIndex: number): SharpnessModifierModel {
 		return _.find(this.appDataProvider.appData.sharpnessModifiers, mod => {
-			return mod.damageType == damageType && mod.colorIndex == colorIndex;
+			return mod.damageType == damageType && (mod as any).colorIndex == colorIndex;
 		});
 	}
 
