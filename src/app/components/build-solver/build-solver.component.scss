@@ -230,6 +230,35 @@
 	font-weight: bold;
 }
 
+.result-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 6px;
+}
+
+.load-build-btn {
+	background: #4a7c59;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	padding: 4px 10px;
+	cursor: pointer;
+	font-size: 11px;
+
+	&:hover {
+		background: #5a9c69;
+	}
+
+	i {
+		margin-right: 4px;
+	}
+}
+
+.weapon-select {
+	margin-top: 6px;
+}
+
 .armor-pieces {
 	.piece {
 		display: flex;

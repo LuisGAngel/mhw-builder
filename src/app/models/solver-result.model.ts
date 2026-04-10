@@ -8,6 +8,7 @@ export class DecorationAssignment {
 }
 
 export class SolverResultModel {
+	weapon?: ItemModel;
 	head: ItemModel;
 	chest: ItemModel;
 	arms: ItemModel;

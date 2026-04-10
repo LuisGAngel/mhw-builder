@@ -56,6 +56,19 @@
 		</select>
 	</div>
 
+	<!-- Weapon Selection (optional) -->
+	<div class="section">
+		<label class="section-label">Weapon (optional)</label>
+		<select [(ngModel)]="selectedWeaponType" (ngModelChange)="onWeaponTypeChange()" class="charm-select">
+			<option [ngValue]="null">-- Select Type --</option>
+			<option *ngFor="let wt of weaponTypes" [ngValue]="wt">{{wt}}</option>
+		</select>
+		<select *ngIf="filteredWeapons.length > 0" [(ngModel)]="selectedWeaponId" class="charm-select weapon-select">
+			<option [ngValue]="null">-- Select Weapon --</option>
+			<option *ngFor="let w of filteredWeapons" [ngValue]="w.id">{{w.name}}</option>
+		</select>
+	</div>
+
 	<!-- Search Button -->
 	<div class="section">
 		<button type="button" class="search-button" (click)="runSearch()" [disabled]="isSearching">
@@ -75,10 +88,19 @@
 			Found {{results.length}} build(s)
 		</div>
 
-		<div class="result-card" *ngFor="let result of results; let i = index" (click)="selectResult(result)">
-			<div class="result-number">#{{i + 1}}</div>
+		<div class="result-card" *ngFor="let result of results; let i = index">
+			<div class="result-header">
+				<div class="result-number">#{{i + 1}}</div>
+				<button type="button" class="load-build-btn" (click)="selectResult(result)">
+					<i class="fas fa-upload"></i> Load Build
+				</button>
+			</div>
 
 			<div class="armor-pieces">
+				<div class="piece" *ngIf="result.weapon">
+					<span class="piece-type">Weapon:</span>
+					<span class="piece-name">{{result.weapon?.name}}</span>
+				</div>
 				<div class="piece">
 					<span class="piece-type">Head:</span>
 					<span class="piece-name">{{result.head?.name}}</span>
