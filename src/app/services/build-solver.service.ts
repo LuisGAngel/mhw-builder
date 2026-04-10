@@ -60,11 +60,14 @@ export class BuildSolverService {
 		// 5. Recursive backtracking search
 		const results: SolverResultModel[] = [];
 		const armorPieces: ItemModel[] = new Array(5);
+		const MAX_ITERATIONS = 500000;
+		let iterations = 0;
 
 		const search = (slotIndex: number, accSkills: { [id: string]: number }, weaponSlots: number[]) => {
-			if (results.length >= maxResults) {
+			if (results.length >= maxResults || iterations >= MAX_ITERATIONS) {
 				return;
 			}
+			iterations++;
 
 			if (slotIndex === 5) {
 				// All 5 armor pieces selected — check decoration feasibility
@@ -114,9 +117,17 @@ export class BuildSolverService {
 
 		// Wildcard: pieces with no target skills but with decoration slots of size >= 1
 		const wildcardIds = new Set(skillRelevant.map(a => a.id));
-		const wildcards = filtered.filter(a =>
+		let wildcards = filtered.filter(a =>
 			!wildcardIds.has(a.id) && a.slots && a.slots.length > 0 && a.slots.some(s => s.level >= 1)
 		);
+
+		// Limit wildcards: keep only the ones with the best total slot capacity
+		wildcards.sort((a, b) => {
+			const totalA = a.slots.reduce((sum, s) => sum + s.level, 0);
+			const totalB = b.slots.reduce((sum, s) => sum + s.level, 0);
+			return totalB - totalA;
+		});
+		wildcards = wildcards.slice(0, 10);
 
 		return [...skillRelevant, ...wildcards];
 	}
