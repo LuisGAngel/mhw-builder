@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --configuration production",
-    "deploy": "ng build --configuration production --base-href /mhw-builder/ && npx angular-cli-ghpages --dir=dist",
+    "deploy": "ng build --configuration production --base-href /mhw-builder/ && npx angular-cli-ghpages --dir=dist/browser",
     "test": "ng test"
   },
   "private": true,

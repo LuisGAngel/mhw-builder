@@ -60,7 +60,7 @@ export class BuildSolverService {
 		// 5. Recursive backtracking search
 		const results: SolverResultModel[] = [];
 		const armorPieces: ItemModel[] = new Array(5);
-		const MAX_ITERATIONS = 500000;
+		const MAX_ITERATIONS = 10000;
 		let iterations = 0;
 
 		const search = (slotIndex: number, accSkills: { [id: string]: number }, weaponSlots: number[]) => {
@@ -127,9 +127,11 @@ export class BuildSolverService {
 			const totalB = b.slots.reduce((sum, s) => sum + s.level, 0);
 			return totalB - totalA;
 		});
-		wildcards = wildcards.slice(0, 10);
+		wildcards = wildcards.slice(0, 5);
 
-		return [...skillRelevant, ...wildcards];
+		// Cap total candidates per slot to prevent combinatorial explosion
+		const combined = [...skillRelevant, ...wildcards];
+		return combined.slice(0, 30);
 	}
 
 	private canPossiblyMeetTarget(

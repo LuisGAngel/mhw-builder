@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { BuildSolverService } from '../../services/build-solver.service';
 import { SkillModel } from '../../models/skill.model';
@@ -6,6 +6,7 @@ import { SkillRequirement, SolverInputModel } from '../../models/solver-input.mo
 import { SolverResultModel } from '../../models/solver-result.model';
 import { ItemModel } from '../../models/item.model';
 import { SlotService } from '../../services/slot.service';
+import { EquipmentService } from '../../services/equipment.service';
 import { WeaponType } from '../../types/weapon.type';
 import { ItemType } from '../../types/item.type';
 
@@ -50,7 +51,9 @@ export class BuildSolverComponent implements OnInit {
 	constructor(
 		private dataService: DataService,
 		private solverService: BuildSolverService,
-		private slotService: SlotService
+		private slotService: SlotService,
+		private equipmentService: EquipmentService,
+		private changeDetector: ChangeDetectorRef
 	) { }
 
 	ngOnInit(): void {
@@ -130,7 +133,7 @@ export class BuildSolverComponent implements OnInit {
 				id: rs.skill.id,
 				level: rs.level
 			} as SkillRequirement)),
-			maxResults: 50
+			maxResults: 10
 		};
 
 		if (this.selectedCharmId) {
@@ -164,6 +167,7 @@ export class BuildSolverComponent implements OnInit {
 			}
 			this.isSearching = false;
 			this.searchDone = true;
+			this.changeDetector.detectChanges();
 		}, 50);
 	}
 
@@ -177,7 +181,7 @@ export class BuildSolverComponent implements OnInit {
 		if (result.weapon) {
 			const weapon = Object.assign({}, result.weapon);
 			weapon.equipmentCategory = 'Weapon' as any;
-			this.slotService.selectedItemSlot = this.slotService.weaponSlot;
+			this.slotService.selectItemSlot(this.slotService.weaponSlot);
 			this.slotService.selectItem(weapon, false);
 		}
 
@@ -201,8 +205,55 @@ export class BuildSolverComponent implements OnInit {
 		if (result.charm) {
 			const charm = Object.assign({}, result.charm);
 			charm.equippedLevel = charm.levels;
-			this.slotService.selectedItemSlot = this.slotService.charmSlot;
+			this.slotService.selectItemSlot(this.slotService.charmSlot);
 			this.slotService.selectItem(charm, false);
+		}
+
+		// Force change detection so Angular renders decoration slot components
+		this.changeDetector.detectChanges();
+
+		// Load decorations now that slots are rendered
+		if (result.decorations && result.decorations.length > 0) {
+			this.loadDecorations(result);
+		}
+
+		this.slotService.selectItemSlot(null);
+
+		// Trigger stat recalculation after all equipment is loaded
+		this.equipmentService.updateItemLevel();
+	}
+
+	private loadDecorations(result: SolverResultModel): void {
+		const remainingDecos = [...result.decorations];
+
+		// Collect all item slots that have decoration slots
+		const itemSlots = [
+			this.slotService.weaponSlot,
+			this.slotService.headSlot,
+			this.slotService.chestSlot,
+			this.slotService.handsSlot,
+			this.slotService.legsSlot,
+			this.slotService.feetSlot,
+		];
+
+		for (const itemSlot of itemSlots) {
+			if (!itemSlot || !itemSlot.decorationSlots || remainingDecos.length === 0) continue;
+
+			const decoSlots = itemSlot.decorationSlots.toArray();
+			for (const decoSlot of decoSlots) {
+				if (decoSlot.decoration || remainingDecos.length === 0) continue;
+
+				// Find a decoration from the result that fits this slot
+				const fitIndex = remainingDecos.findIndex(da => da.decoration.level <= decoSlot.level);
+				if (fitIndex !== -1) {
+					const assignment = remainingDecos.splice(fitIndex, 1)[0];
+					const deco = Object.assign({}, assignment.decoration);
+					deco.itemId = decoSlot.itemId;
+					deco.itemType = decoSlot.itemType;
+					decoSlot.decoration = deco;
+					this.equipmentService.addDecoration(deco, false);
+				}
+			}
 		}
 	}
 }

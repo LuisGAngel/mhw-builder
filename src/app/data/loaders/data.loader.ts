@@ -110,7 +110,7 @@ export abstract class DataLoader<T> {
 
 	protected parseTextContent(content: string, columnParsers: ColumnParser[] = []): T[] {
 		const result: Array<T> = [];
-		const rows = content.split('\n');
+		const rows = content.split('\n').map(r => r.replace(/\r$/, ''));
 		const headerColumns = rows[0].split(this.delimeter);
 
 		for (let i = 1; i < rows.length; i++) {
